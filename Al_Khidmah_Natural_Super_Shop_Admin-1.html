@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Al Khidmah Natural Super Shop</title>
+<style>
+:root{--green:#0d6b45;--dark:#073d2a;--gold:#d8a83e;--bg:#f6faf7;--white:#fff;--muted:#66756d}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,"Noto Sans Bengali",sans-serif;background:var(--bg);color:#17352a}
+a{text-decoration:none;color:inherit}.top{background:var(--dark);color:#fff;text-align:center;padding:8px;font-size:13px}
+header{background:#fff;position:sticky;top:0;z-index:20;box-shadow:0 2px 12px #0001}
+.nav{max-width:1150px;margin:auto;padding:15px 18px;display:flex;align-items:center;justify-content:space-between;gap:15px}
+.logo{font-size:21px;font-weight:800;color:var(--green)}.logo small{display:block;color:var(--muted);font-size:10px;letter-spacing:1px}
+.navlinks{display:flex;gap:20px;font-size:14px}.navlinks a:hover{color:var(--green)}
+.cart{background:var(--green);color:#fff;padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer}
+.hero{max-width:1150px;margin:25px auto;padding:45px 28px;border-radius:24px;background:linear-gradient(135deg,#e5f6ec,#fff8e6);display:grid;grid-template-columns:1.3fr .7fr;align-items:center;gap:25px}
+.hero h1{font-size:44px;line-height:1.12;margin:0 0 15px;color:var(--dark)}.hero p{font-size:17px;color:#53665d;line-height:1.7}
+.btn{display:inline-block;background:var(--green);color:#fff;padding:13px 20px;border-radius:10px;border:0;font-weight:700;cursor:pointer}.btn.alt{background:#fff;color:var(--green);border:1px solid #cfe4d8}
+.hero-card{background:#fff;border-radius:20px;padding:30px;text-align:center;box-shadow:0 10px 35px #174b3215}.hero-card .icon{font-size:70px}
+section{max-width:1150px;margin:42px auto;padding:0 18px}.title{display:flex;justify-content:space-between;align-items:end;margin-bottom:18px}.title h2{margin:0;color:var(--dark)}.title span{color:var(--muted);font-size:13px}
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}.filters button{border:1px solid #d5e4dc;background:#fff;padding:9px 13px;border-radius:20px;cursor:pointer}.filters button.active{background:var(--green);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 5px 20px #174b3210;border:1px solid #e4eee8}.pic{height:180px;background:linear-gradient(135deg,#e9f7ef,#fff3d2);display:flex;align-items:center;justify-content:center;font-size:65px}.info{padding:15px}.info h3{margin:0 0 7px;font-size:17px}.desc{font-size:12px;color:var(--muted);min-height:32px}.price{font-weight:800;color:var(--green);font-size:18px}.old{text-decoration:line-through;color:#999;font-size:12px;margin-left:7px}.add{width:100%;margin-top:10px}
+.features{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.feature{background:#fff;padding:20px;border-radius:15px;text-align:center;border:1px solid #e2eee7}.feature b{display:block;margin:8px 0 5px}.feature span{font-size:12px;color:var(--muted)}
+.review{background:#fff;padding:20px;border-radius:16px;border:1px solid #e4eee8}.review p{line-height:1.7}.stars{color:#d89d19}
+.contact{background:var(--dark);color:#fff;border-radius:22px;padding:30px;display:grid;grid-template-columns:1fr 1fr;gap:25px}.contact p{color:#d6e8df}.contact input,.contact textarea{width:100%;padding:12px;margin:5px 0 10px;border-radius:9px;border:1px solid #dce8e2}
+footer{background:#052e20;color:#d9e9e2;text-align:center;padding:25px;margin-top:45px;font-size:13px}
+.modal{display:none;position:fixed;inset:0;background:#0008;z-index:50;align-items:center;justify-content:center;padding:15px}.modal.show{display:flex}.box{background:#fff;width:min(600px,100%);max-height:90vh;overflow:auto;border-radius:18px;padding:22px}.box h2{margin-top:0}.row{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid #eee;padding:10px 0}.qty button{border:1px solid #ddd;background:#fff;border-radius:6px;padding:3px 8px;cursor:pointer}.close{float:right;border:0;background:#eee;border-radius:50%;width:30px;height:30px;cursor:pointer}
+label{font-size:13px;font-weight:700}.form input,.form textarea,.form select{width:100%;padding:11px;border:1px solid #d9e5df;border-radius:8px;margin:5px 0 12px}.total{font-size:19px;font-weight:800;text-align:right;padding:15px 0}.notice{background:#fff6d9;padding:12px;border-radius:10px;font-size:13px;color:#705a1c}.cod{background:#e8f7ee;border:1px solid #bfe1cc;padding:12px;border-radius:10px;margin:8px 0 14px}.cod b{color:var(--dark)}
+.admin{display:none}.admin.show{display:block}.admin table{width:100%;border-collapse:collapse;background:#fff}.admin th,.admin td{padding:10px;border-bottom:1px solid #eee;text-align:left;font-size:13px}
+.admin-actions{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.admin-product{border:1px solid #e4eee8;border-radius:12px;padding:12px;margin:10px 0;background:#fff}
+.admin-product .ap-row{display:grid;grid-template-columns:80px 1fr 1fr 1fr auto;gap:8px;align-items:center}
+.admin-product input,.admin-product select{width:100%;padding:9px;border:1px solid #d9e5df;border-radius:7px}
+.small-btn{border:0;border-radius:7px;padding:8px 10px;cursor:pointer;font-weight:700}
+.danger{background:#ffe8e8;color:#a40000}
+.success{background:#e8f7ee;color:#075c35}
+@media(max-width:700px){.admin-product .ap-row{grid-template-columns:1fr 1fr}.admin-product .ap-icon{grid-column:1/-1}}
+
+@media(max-width:800px){.navlinks{display:none}.hero{grid-template-columns:1fr;padding:30px 20px}.hero h1{font-size:32px}.grid{grid-template-columns:repeat(2,1fr)}.features{grid-template-columns:repeat(2,1fr)}.contact{grid-template-columns:1fr}}
+@media(max-width:480px){.grid{grid-template-columns:1fr}.hero-card{display:none}.features{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="top">🚚 সারা বাংলাদেশে হোম ডেলিভারি • 🛒 সহজে অর্ডার করুন</div>
+<header><div class="nav">
+<div class="logo">Al Khidmah Natural Super Shop<small>QUALITY • TRUST • SERVICE</small></div>
+<div class="navlinks"><a href="#home">হোম</a><a href="#products">পণ্য</a><a href="#reviews">রিভিউ</a><a href="#contact">যোগাযোগ</a></div>
+<button class="cart" onclick="openCart()">🛒 কার্ট (<span id="cartCount">0</span>)</button>
+</div></header>
+
+<main id="home">
+<div class="hero">
+<div><h1>প্রাকৃতিক পণ্যে<br><span style="color:var(--green)">বিশ্বাসের ঠিকানা</span></h1>
+<p>Al Khidmah Natural Super Shop — আপনার পছন্দের পণ্য সহজে বেছে নিন এবং ঘরে বসেই অর্ডার করুন।</p>
+<a class="btn" href="#products">🛍️ পণ্য দেখুন</a>
+<a class="btn alt" href="#contact">যোগাযোগ</a>
+  <a class="btn alt" href="javascript:openWhatsApp()">💬 WhatsApp</a></div>
+<div class="hero-card"><div class="icon">🌿</div><h3>Natural & Trusted</h3><p>গুণমান, সেবা ও গ্রাহক সন্তুষ্টিকে গুরুত্ব দিয়ে।</p></div>
+</div>
+
+<section><div class="features">
+<div class="feature">🚚<b>হোম ডেলিভারি</b><span>ঘরে বসে অর্ডার করুন</span></div>
+<div class="feature">🛡️<b>বিশ্বস্ত সেবা</b><span>গ্রাহকের আস্থাই আমাদের লক্ষ্য</span></div>
+<div class="feature">💵<b>ক্যাশ অন ডেলিভারি</b><span>পণ্য হাতে পেয়ে টাকা দিন</span></div>
+<div class="feature">⭐<b>গ্রাহক মতামত</b><span>আপনার সন্তুষ্টিই গুরুত্বপূর্ণ</span></div>
+</div></section>
+
+<section id="products"><div class="title"><div><h2>জনপ্রিয় পণ্য</h2><span>আপনার পছন্দের পণ্য বেছে নিন</span></div></div>
+<div class="filters" id="filters"></div><div class="grid" id="productGrid"></div></section>
+
+<section id="reviews"><div class="title"><div><h2>কাস্টমার রিভিউ</h2><span>আমাদের গ্রাহকদের অভিজ্ঞতা</span></div></div>
+<div class="grid" style="grid-template-columns:repeat(3,1fr)">
+<div class="review"><div class="stars">★★★★★</div><p>“পণ্যটি ব্যবহার করে ভালো লেগেছে। প্যাকেজিংও সুন্দর ছিল।”</p><b>— একজন সন্তুষ্ট ক্রেতা</b></div>
+<div class="review"><div class="stars">★★★★★</div><p>“অর্ডার করা সহজ এবং সার্ভিস ভালো।”</p><b>— নিয়মিত ক্রেতা</b></div>
+<div class="review"><div class="stars">★★★★★</div><p>“সময়মতো পণ্য পেয়েছি। আবারও অর্ডার করব ইনশাআল্লাহ।”</p><b>— একজন ক্রেতা</b></div>
+</div></section>
+
+<section id="contact"><div class="contact">
+<div><h2>যোগাযোগ করুন</h2><p>পণ্য সম্পর্কে জানতে বা অর্ডার করতে আমাদের সাথে যোগাযোগ করুন।</p><p>📱 WhatsApp: অর্ডার ও যোগাযোগের জন্য</p><p>🚚 হোম ডেলিভারি: সারা বাংলাদেশ</p><p>🕐 সেবা: প্রতিদিন</p></div>
+<div class="form"><label>আপনার নাম</label><input id="cname" placeholder="নাম লিখুন"><label>মোবাইল নম্বর</label><input id="cphone" placeholder="01XXXXXXXXX"><label>বার্তা</label><textarea id="cmsg" rows="4" placeholder="আপনার বার্তা"></textarea><button class="btn" onclick="sendContact()">WhatsApp-এ পাঠান</button></div>
+</div></section>
+
+<section class="admin" id="admin"><h2>অ্যাডমিন — পণ্য ও অর্ডার</h2><div class="notice">এখান থেকে পণ্য যোগ, পরিবর্তন ও মুছতে পারবেন। এই ডেমো সংস্করণে তথ্য এই ব্রাউজারের Local Storage-এ থাকে।</div><br><h3>🛍️ পণ্য ম্যানেজমেন্ট</h3><div class="admin-actions"><button class="btn" onclick="showAddProduct()">＋ নতুন পণ্য যোগ করুন</button><button class="btn alt" onclick="renderAdminProducts()">🔄 তালিকা আপডেট</button></div><div id="adminProducts"></div><hr><h3>📦 সাম্প্রতিক অর্ডার</h3><div id="orders"></div></section>
+</main>
+<footer>© 2026 Al Khidmah Natural Super Shop • All Rights Reserved</footer>
+
+<div class="modal" id="cartModal"><div class="box"><button class="close" onclick="closeModal('cartModal')">×</button><h2>🛒 আপনার কার্ট</h2><div id="cartItems"></div><div class="total" id="cartTotal"></div><div id="checkout"></div></div></div>
+<div class="modal" id="adminModal"><div class="box"><button class="close" onclick="closeModal('adminModal')">×</button><h2>🔐 অ্যাডমিন</h2><input id="adminPass" placeholder="পাসওয়ার্ড" type="password"><button class="btn" onclick="loginAdmin()">প্রবেশ</button><div id="adminArea"></div></div></div>
+
+<script>
+// ==================== SHOP SETTINGS ====================
+const SHOP_NAME = "Al Khidmah Natural Super Shop";
+const WHATSAPP = "8801624053643"; // Al Khidmah Natural Super Shop WhatsApp
+const DELIVERY_TEXT = "সারা বাংলাদেশে হোম ডেলিভারি";
+const ORDER_NOTE = "অর্ডার কনফার্ম করতে নাম, মোবাইল ও সম্পূর্ণ ঠিকানা দিন।";
+const ADMIN_PASSWORD = "1234"; // পরে পরিবর্তন করুন
+// =======================================================
+let products = JSON.parse(localStorage.getItem('ak_products')||'null') || [
+{id:1,name:"শাহী হালুয়া",price:800,old:1200,cat:"খাদ্য",icon:"🍯",desc:"বিশেষ অফার মূল্যে"},
+{id:2,name:"ন্যাচারেল হারবাল পণ্য",price:650,old:850,cat:"হারবাল",icon:"🌿",desc:"প্রাকৃতিক উপাদানসমৃদ্ধ"},
+{id:3,name:"হেলথ কেয়ার পণ্য",price:900,old:1100,cat:"হেলথ",icon:"🧴",desc:"দৈনন্দিন যত্নের জন্য"},
+{id:4,name:"ন্যাচারেল ফুড",price:550,old:700,cat:"খাদ্য",icon:"🥗",desc:"পছন্দের খাবার ও উপকরণ"}
+];
+let cart=JSON.parse(localStorage.getItem('ak_cart')||'[]');
+
+function money(n){return new Intl.NumberFormat('bn-BD').format(n)+" টাকা"}
+function save(){localStorage.setItem('ak_cart',JSON.stringify(cart));document.getElementById('cartCount').textContent=cart.reduce((a,b)=>a+b.qty,0)}
+function renderFilters(){
+ let cats=['সব',...new Set(products.map(p=>p.cat))];
+ document.getElementById('filters').innerHTML=cats.map((c,i)=>`<button class="${i?'':'active'}" onclick="filterCat('${c}',this)">${c}</button>`).join('');
+}
+function renderProducts(list=products){
+ document.getElementById('productGrid').innerHTML=list.map(p=>`<div class="card"><div class="pic">${p.icon}</div><div class="info"><h3>${p.name}</h3><div class="desc">${p.desc}</div><p><span class="price">${money(p.price)}</span><span class="old">${money(p.old)}</span></p><button class="btn add" onclick="addCart(${p.id})">🛒 কার্টে যোগ করুন</button></div></div>`).join('');
+}
+function filterCat(cat,el){document.querySelectorAll('.filters button').forEach(x=>x.classList.remove('active'));el.classList.add('active');renderProducts(cat==='সব'?products:products.filter(p=>p.cat===cat))}
+function addCart(id){let p=products.find(x=>x.id===id), x=cart.find(x=>x.id===id);x?x.qty++:cart.push({id,qty:1});save();openCart()}
+function changeQty(id,d){let x=cart.find(x=>x.id===id);if(!x)return;x.qty+=d;if(x.qty<=0)cart=cart.filter(y=>y.id!==id);save();renderCart()}
+function openCart(){renderCart();document.getElementById('cartModal').classList.add('show')}
+function closeModal(id){document.getElementById(id).classList.remove('show')}
+function renderCart(){
+ let items=cart.map(x=>{let p=products.find(y=>y.id===x.id);return {...p,qty:x.qty}});let total=items.reduce((a,x)=>a+x.price*x.qty,0);
+ document.getElementById('cartItems').innerHTML=items.length?items.map(x=>`<div class="row"><div><b>${x.name}</b><br><small>${money(x.price)} × ${x.qty}</small></div><div class="qty"><button onclick="changeQty(${x.id},-1)">−</button> ${x.qty} <button onclick="changeQty(${x.id},1)">+</button></div></div>`).join(''):'<p>কার্ট খালি।</p>';
+ document.getElementById('cartTotal').textContent=items.length?'মোট: '+money(total):'';
+ document.getElementById('checkout').innerHTML=items.length?`<div class="form"><h3>অর্ডার তথ্য</h3><div class="notice">${ORDER_NOTE}</div><div class="cod">💵 <b>ক্যাশ অন ডেলিভারি</b><br><small>পণ্য হাতে পাওয়ার সময় ডেলিভারি ম্যানকে টাকা পরিশোধ করবেন।</small></div><label>নাম</label><input id="oname" placeholder="আপনার নাম"><label>মোবাইল</label><input id="ophone" placeholder="01XXXXXXXXX"><label>ঠিকানা</label><textarea id="oaddress" rows="3" placeholder="সম্পূর্ণ ডেলিভারি ঠিকানা"></textarea><label>পেমেন্ট</label><select id="opayment"><option value="COD">ক্যাশ অন ডেলিভারি</option></select><button class="btn" style="width:100%" onclick="placeOrder()">📦 ক্যাশ অন ডেলিভারিতে অর্ডার করুন</button></div>`:'';
+}
+function placeOrder(){
+ let name=document.getElementById('oname').value.trim(),phone=document.getElementById('ophone').value.trim(),address=document.getElementById('oaddress').value.trim();
+  let payment='ক্যাশ অন ডেলিভারি';
+ if(!name||!phone||!address){alert('নাম, মোবাইল ও ঠিকানা পূরণ করুন।');return}
+ let items=cart.map(x=>{let p=products.find(y=>y.id===x.id);return `${p.name} × ${x.qty} = ${money(p.price*x.qty)}`}).join('\\n');
+ let total=cart.reduce((a,x)=>a+products.find(y=>y.id===x.id).price*x.qty,0);
+ let order={id:Date.now(),date:new Date().toLocaleString('bn-BD'),name,phone,address,payment,items,total};
+ let orders=JSON.parse(localStorage.getItem('ak_orders')||'[]');orders.unshift(order);localStorage.setItem('ak_orders',JSON.stringify(orders));
+ let msg=`নতুন অর্ডার - Al Khidmah Natural Super Shop\\n\\nনাম: ${name}\\nমোবাইল: ${phone}\\nঠিকানা: ${address}\\n\\nপণ্য:\\n${items}\\n\\nমোট: ${money(total)}`;
+ if(WHATSAPP) window.open('https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent(msg),'_blank'); else alert('অর্ডারটি সংরক্ষণ হয়েছে। WhatsApp নম্বর যোগ করলে সরাসরি WhatsApp-এ পাঠানো যাবে।');
+ cart=[];save();closeModal('cartModal');
+}
+function openWhatsApp(){
+  if(!WHATSAPP){
+    alert('WhatsApp নম্বর এখনো সেট করা হয়নি। ফাইলে WHATSAPP-এর জায়গায় 880 দিয়ে নম্বর দিন।');
+    return;
+  }
+  window.open('https://wa.me/'+WHATSAPP,'_blank');
+}
+
+function sendContact(){let n=document.getElementById('cname').value,p=document.getElementById('cphone').value,m=document.getElementById('cmsg').value;let msg=`Al Khidmah Natural Super Shop-এ যোগাযোগ\\nনাম: ${n}\\nমোবাইল: ${p}\\nবার্তা: ${m}`;if(WHATSAPP)window.open('https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent(msg),'_blank');else alert('WhatsApp নম্বর এখনো সেট করা হয়নি।')}
+function loginAdmin(){
+  if(document.getElementById('adminPass').value!==ADMIN_PASSWORD){alert('পাসওয়ার্ড ভুল।');return}
+  document.getElementById('adminArea').innerHTML='<div class="admin show"><h3>অ্যাডমিন কন্ট্রোল</h3><div class="notice">পণ্য ও অর্ডার এখান থেকেই পরিচালনা করুন।</div><h3>🛍️ পণ্য ম্যানেজমেন্ট</h3><div class="admin-actions"><button class="btn" onclick="showAddProduct()">＋ নতুন পণ্য যোগ করুন</button><button class="btn alt" onclick="renderAdminProducts()">🔄 রিফ্রেশ</button></div><div id="adminProducts"></div><hr><h3>📦 অর্ডার তালিকা</h3><div id="orders"></div></div>';
+  renderAdminProducts(); renderOrders();
+}
+function showAddProduct(){
+  let name=prompt('পণ্যের নাম লিখুন:'); if(name===null)return; name=name.trim(); if(!name)return alert('পণ্যের নাম দিন।');
+  let price=Number(prompt('বিক্রয় মূল্য (টাকা):','500')); if(!Number.isFinite(price)||price<0)return alert('সঠিক দাম দিন।');
+  let old=Number(prompt('আগের/মূল মূল্য (টাকা):',String(price))); if(!Number.isFinite(old)||old<0)old=price;
+  let cat=prompt('ক্যাটাগরি লিখুন:','অন্যান্য'); if(cat===null)return; cat=cat.trim()||'অন্যান্য';
+  let icon=prompt('ইমোজি/ছোট আইকন দিন (যেমন 🍯):','🛍️'); if(icon===null)icon='🛍️';
+  let desc=prompt('পণ্যের সংক্ষিপ্ত বিবরণ:','ভালো মানের পণ্য'); if(desc===null)desc='';
+  let id=Date.now(); products.push({id,name,price,old,cat,icon,desc}); localStorage.setItem('ak_products',JSON.stringify(products));
+  renderFilters(); renderProducts(); renderAdminProducts(); alert('পণ্য যোগ হয়েছে।');
+}
+function editProduct(id){
+  let p=products.find(x=>x.id===id); if(!p)return;
+  let name=prompt('পণ্যের নাম:',p.name); if(name===null)return;
+  let price=Number(prompt('বিক্রয় মূল্য:',p.price)); if(!Number.isFinite(price)||price<0)return alert('সঠিক দাম দিন।');
+  let old=Number(prompt('আগের/মূল মূল্য:',p.old)); if(!Number.isFinite(old)||old<0)old=price;
+  let cat=prompt('ক্যাটাগরি:',p.cat); if(cat===null)return;
+  let icon=prompt('ইমোজি/আইকন:',p.icon); if(icon===null)return;
+  let desc=prompt('সংক্ষিপ্ত বিবরণ:',p.desc); if(desc===null)return;
+  Object.assign(p,{name:name.trim()||p.name,price,old,cat:cat.trim()||p.cat,icon:icon.trim()||p.icon,desc});
+  localStorage.setItem('ak_products',JSON.stringify(products)); renderFilters(); renderProducts(); renderAdminProducts();
+}
+function deleteProduct(id){
+  let p=products.find(x=>x.id===id); if(!p)return;
+  if(!confirm('“'+p.name+'” পণ্যটি মুছে ফেলবেন?'))return;
+  products=products.filter(x=>x.id!==id);
+  cart=cart.filter(x=>x.id!==id);
+  localStorage.setItem('ak_products',JSON.stringify(products)); save(); renderFilters(); renderProducts(); renderAdminProducts();
+}
+function renderAdminProducts(){
+  let el=document.getElementById('adminProducts'); if(!el)return;
+  el.innerHTML=products.length?products.map(p=>`<div class="admin-product"><div class="ap-row"><div class="ap-icon" style="font-size:34px;text-align:center">${p.icon}</div><input value="${p.name.replace(/"/g,'&quot;')}" disabled><input value="${p.price}" disabled><input value="${p.cat.replace(/"/g,'&quot;')}" disabled><div><button class="small-btn success" onclick="editProduct(${p.id})">✏️</button> <button class="small-btn danger" onclick="deleteProduct(${p.id})">🗑️</button></div></div></div>`).join(''):'কোনো পণ্য নেই।';
+}
+function renderOrders(){let os=JSON.parse(localStorage.getItem('ak_orders')||'[]');document.getElementById('orders').innerHTML=os.length?`<table><tr><th>সময়</th><th>গ্রাহক</th><th>ফোন</th><th>ঠিকানা</th><th>পেমেন্ট</th><th>মোট</th></tr>${os.map(o=>`<tr><td>${o.date}</td><td>${o.name}</td><td>${o.phone}</td><td>${o.address}</td><td>${o.payment||"ক্যাশ অন ডেলিভারি"}</td><td>${money(o.total)}</td></tr>`).join('')}</table>`:'কোনো অর্ডার নেই।'}
+document.addEventListener('keydown',e=>{if(e.ctrlKey&&e.shiftKey&&e.key.toLowerCase()==='a'){document.getElementById('adminModal').classList.add('show')}});
+renderFilters();renderProducts();save();
+</script>
+</body>
+</html>

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>এডমিন প্যানেল — Al Khidmah</title>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--g:#1f7a3d;--gd:#14562a;--gl:#e8f5ec;--ink:#1c2b22;--mut:#5f6f65;--bg:#f3f6f4;--line:#dfe8e1;--red:#c0392b;--gold:#f2a900;--blue:#2563eb}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Hind Siliguri',sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
+button{font-family:inherit;cursor:pointer;border:0}
+input,textarea,select{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:9px;font:inherit;background:#fff}
+label{font-size:13px;color:var(--mut);display:block;margin-bottom:3px}
+.btn{padding:8px 14px;border-radius:9px;font-weight:600;font-size:14px;background:var(--g);color:#fff}
+.btn.o{background:#fff;color:var(--g);border:1px solid var(--g)}.btn.r{background:var(--red)}.btn.s{padding:5px 10px;font-size:13px}
+#login{min-height:100vh;display:grid;place-items:center;padding:16px}
+.lb{background:#fff;border-radius:16px;padding:24px;width:min(380px,100%);display:grid;gap:12px;box-shadow:0 6px 24px rgba(0,0,0,.08)}
+.lb h1{color:var(--gd);font-size:22px;text-align:center}
+.err{color:var(--red);font-size:14px;min-height:20px}
+#app{display:none}
+.top{background:var(--gd);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 14px;position:sticky;top:0;z-index:20}
+.top b{font-size:17px}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:10px 14px;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:46px;z-index:19}
+.tabs button{white-space:nowrap;padding:7px 14px;border-radius:18px;background:var(--bg);font-size:14px;font-weight:500}
+.tabs button.on{background:var(--g);color:#fff}
+main{max-width:1100px;margin:0 auto;padding:14px}
+.panel{display:none}.panel.on{display:block}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:14px}
+.stat{background:#fff;border-radius:12px;padding:12px;border:1px solid var(--line)}
+.stat small{color:var(--mut)}.stat b{display:block;font-size:22px;color:var(--gd)}
+.box{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:14px}
+.box h3{margin-bottom:10px;color:var(--gd);font-size:17px}
+.bars{display:flex;gap:8px;align-items:flex-end;height:140px}
+.bars div{flex:1;text-align:center;font-size:11px;color:var(--mut);display:flex;flex-direction:column;justify-content:flex-end;height:100%}
+.bars i{display:block;background:var(--g);border-radius:5px 5px 0 0;min-height:2px}
+.bars span{color:var(--ink);font-weight:600}
+.row{display:flex;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border:0}
+.row img,.row .ph{width:52px;height:52px;border-radius:9px;object-fit:cover;background:var(--gl);display:grid;place-items:center;flex-shrink:0}
+.row .t{flex:1;min-width:0}.row .t small{color:var(--mut);display:block}
+.form{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.form .full{grid-column:1/-1}
+.pill{display:inline-block;padding:2px 10px;border-radius:12px;font-size:12px;font-weight:600}
+.s-নতুন{background:#dbeafe;color:#1e40af}.s-কনফার্মড{background:#fef3c7;color:#92400e}.s-শিপড{background:#ede9fe;color:#5b21b6}.s-ডেলিভারড{background:#dcfce7;color:#166534}.s-ক্যান্সেল{background:#fee2e2;color:#991b1b}
+.ord{border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:10px;background:#fff}
+.ord .h{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:center}
+.ord ul{margin:8px 0 8px 18px;font-size:14px}
+.ord .act{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:8px}
+.ord select{width:auto}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.filters select,.filters input{width:auto;flex:1;min-width:130px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{padding:7px 8px;border-bottom:1px solid var(--line);text-align:left}
+th{color:var(--mut);font-weight:500}
+.tw{overflow-x:auto}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;z-index:50;align-items:flex-start;justify-content:center;overflow-y:auto;padding:16px}
+.modal.show{display:flex}
+.mb{background:#fff;border-radius:14px;padding:16px;width:min(560px,100%);margin:auto}
+.mb h3{margin-bottom:10px;color:var(--gd)}
+.pv{width:100%;max-height:160px;object-fit:contain;border-radius:8px;margin-top:6px;background:var(--gl)}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:9px 18px;border-radius:22px;z-index:99;opacity:0;pointer-events:none;transition:.3s}
+.toast.show{opacity:1}
+.muted{color:var(--mut)}
+</style>
+</head>
+<body>
+
+<div id="login">
+  <form class="lb" id="lf">
+    <h1>🌿 Al Khidmah এডমিন</h1>
+    <div><label>ইমেইল</label><input id="em" type="email" required autocomplete="username"></div>
+    <div><label>পাসওয়ার্ড</label><input id="pw" type="password" required autocomplete="current-password"></div>
+    <div class="err" id="le"></div>
+    <button class="btn" type="submit">প্রবেশ করুন</button>
+  </form>
+</div>
+
+<div id="app">
+  <div class="top"><b>🌿 Al Khidmah এডমিন</b><span><a href="index.html" target="_blank" style="color:#fff;margin-right:12px;font-size:14px">🌐 সাইট</a><button class="btn s o" id="lo">লগআউট</button></span></div>
+  <div class="tabs" id="tabs">
+    <button data-t="dash" class="on">📊 ড্যাশবোর্ড</button>
+    <button data-t="orders">📦 অর্ডার</button>
+    <button data-t="products">🛍️ পণ্য</button>
+    <button data-t="cats">🗂️ ক্যাটাগরি</button>
+    <button data-t="banners">🖼️ ব্যানার</button>
+    <button data-t="report">📈 সেলস রিপোর্ট</button>
+    <button data-t="settings">⚙️ সেটিংস</button>
+  </div>
+  <main>
+    <section class="panel on" id="p-dash"></section>
+    <section class="panel" id="p-orders"></section>
+    <section class="panel" id="p-products"></section>
+    <section class="panel" id="p-cats"></section>
+    <section class="panel" id="p-banners"></section>
+    <section class="panel" id="p-report"></section>
+    <section class="panel" id="p-settings"></section>
+  </main>
+</div>
+
+<div class="modal" id="modal"><div class="mb" id="mb"></div></div>
+<div class="toast" id="toast"></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore, collection, getDocs, getDoc, doc, addDoc, setDoc, updateDoc, deleteDoc, query, orderBy, limit, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { firebaseConfig, DEFAULT_WHATSAPP, DEFAULT_DELIVERY_CHARGE } from "./firebase-config.js";
+
+const $ = s => document.querySelector(s);
+const bn = n => String(n).replace(/\d/g, d => "০১২৩৪৫৬৭৮৯"[d]);
+const money = n => "৳" + bn(Math.round(n || 0));
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const toast = m => { const t = $("#toast"); t.textContent = m; t.classList.add("show"); setTimeout(() => t.classList.remove("show"), 2200); };
+const STATUSES = ["নতুন", "কনফার্মড", "শিপড", "ডেলিভারড", "ক্যান্সেল"];
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app), db = getFirestore(app);
+let D = { products: [], cats: [], banners: [], orders: [], settings: { whatsapp: DEFAULT_WHATSAPP, deliveryCharge: DEFAULT_DELIVERY_CHARGE } };
+
+// ---------- auth
+$("#lf").addEventListener("submit", async e => {
+  e.preventDefault(); $("#le").textContent = "";
+  try { await signInWithEmailAndPassword(auth, $("#em").value.trim(), $("#pw").value); }
+  catch { $("#le").textContent = "ইমেইল বা পাসওয়ার্ড ভুল।"; }
+});
+$("#lo").addEventListener("click", () => signOut(auth));
+onAuthStateChanged(auth, async u => {
+  $("#login").style.display = u ? "none" : "grid";
+  $("#app").style.display = u ? "block" : "none";
+  if (u) await loadAll();
+});
+
+// ---------- data
+const snap = async (name, ...q) => (await getDocs(query(collection(db, name), ...q))).docs.map(d => ({ id: d.id, ...d.data() }));
+async function loadAll() {
+  try {
+    const [products, cats, banners, orders, s] = await Promise.all([
+      snap("products", orderBy("createdAt", "desc")), snap("categories"), snap("banners"),
+      snap("orders", orderBy("createdAt", "desc"), limit(1000)), getDoc(doc(db, "settings", "main"))
+    ]);
+    D.products = products; D.cats = cats; D.banners = banners; D.orders = orders;
+    if (s.exists()) D.settings = { ...D.settings, ...s.data() };
+  } catch (e) { console.error(e); toast("তথ্য লোড করা যায়নি — রুলস/ইমেইল ঠিক আছে কি দেখুন"); }
+  renderAll();
+}
+const ts = o => o.createdAt?.toDate ? o.createdAt.toDate() : new Date(0);
+const dkey = d => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+const fdate = d => bn(d.toLocaleDateString("en-GB")) + " " + bn(d.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" }));
+const valid = o => o.status !== "ক্যান্সেল";
+
+// ---------- tabs
+$("#tabs").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  document.querySelectorAll("#tabs button").forEach(x => x.classList.toggle("on", x === b));
+  document.querySelectorAll(".panel").forEach(p => p.classList.toggle("on", p.id === "p-" + b.dataset.t));
+});
+function renderAll() { dash(); orders(); products(); cats(); banners(); report(); settings(); }
+
+// ---------- image helper (resize -> base64, no paid storage needed)
+function fileToData(file, max, q = 0.72) {
+  return new Promise((res, rej) => {
+    const r = new FileReader();
+    r.onload = () => { const im = new Image(); im.onload = () => {
+      const k = Math.min(1, max / Math.max(im.width, im.height)); const c = document.createElement("canvas");
+      c.width = Math.round(im.width * k); c.height = Math.round(im.height * k);
+      c.getContext("2d").drawImage(im, 0, 0, c.width, c.height); res(c.toDataURL("image/jpeg", q)); };
+      im.onerror = rej; im.src = r.result; };
+    r.onerror = rej; r.readAsDataURL(file);
+  });
+}
+const openModal = h => { $("#mb").innerHTML = h; $("#modal").classList.add("show"); };
+const closeModal = () => $("#modal").classList.remove("show");
+$("#modal").addEventListener("click", e => { if (e.target.id === "modal" || e.target.closest("[data-x]")) closeModal(); });
+
+// ---------- dashboard
+function dash() {
+  const now = new Date(), today = dkey(now), month = now.getFullYear() + "-" + now.getMonth();
+  const v = D.orders.filter(valid);
+  const sum = a => a.reduce((x, o) => x + (o.total || 0), 0);
+  const tod = v.filter(o => dkey(ts(o)) === today), mon = v.filter(o => { const d = ts(o); return d.getFullYear() + "-" + d.getMonth() === month; });
+  const days = [...Array(7)].map((_, i) => { const d = new Date(now); d.setDate(d.getDate() - (6 - i)); const k = dkey(d); return { l: bn(d.getDate()) + "/" + bn(d.getMonth() + 1), t: sum(v.filter(o => dkey(ts(o)) === k)) }; });
+  const mx = Math.max(1, ...days.map(d => d.t));
+  const low = D.products.filter(p => p.stock !== "" && p.stock != null && Number(p.stock) <= 5);
+  $("#p-dash").innerHTML = `<div class="stats">
+    <div class="stat"><small>নতুন অর্ডার</small><b>${bn(D.orders.filter(o => o.status === "নতুন").length)}</b></div>
+    <div class="stat"><small>আজকের বিক্রি</small><b>${money(sum(tod))}</b></div>
+    <div class="stat"><small>এই মাসের বিক্রি</small><b>${money(sum(mon))}</b></div>
+    <div class="stat"><small>মোট পণ্য</small><b>${bn(D.products.length)}</b></div></div>
+  <div class="box"><h3>গত ৭ দিনের বিক্রি</h3><div class="bars">${days.map(d => `<div><span>${d.t ? bn(Math.round(d.t)) : ""}</span><i style="height:${Math.round(d.t / mx * 100)}px"></i>${d.l}</div>`).join("")}</div></div>
+  <div class="box"><h3>⚠️ কম স্টক (৫ বা কম)</h3>${low.length ? low.map(p => `<div class="row"><div class="t">${esc(p.name)}</div><b>${bn(p.stock)}</b></div>`).join("") : '<p class="muted">কম স্টকের কোনো পণ্য নেই।</p>'}</div>`;
+}
+
+// ---------- orders
+let ofil = { s: "all", q: "" };
+function orders() {
+  const list = D.orders.filter(o => (ofil.s === "all" || o.status === ofil.s) && (!ofil.q || (o.name + o.phone + o.id).toLowerCase().includes(ofil.q)));
+  $("#p-orders").innerHTML = `<div class="filters"><select id="os"><option value="all">সব স্ট্যাটাস</option>${STATUSES.map(s => `<option ${ofil.s === s ? "selected" : ""}>${s}</option>`).join("")}</select>
+    <input id="oq" placeholder="নাম / মোবাইল / অর্ডার নং" value="${esc(ofil.q)}"></div>
+    ${list.length ? list.map(o => `<div class="ord"><div class="h"><b>#${o.id.slice(0, 6).toUpperCase()}</b><span class="pill s-${o.status}">${o.status}</span><small class="muted">${fdate(ts(o))}</small></div>
+    <div><b>${esc(o.name)}</b> • <a href="tel:${esc(o.phone)}">${esc(o.phone)}</a><br><small>${esc(o.address)}</small>${o.note ? `<br><small class="muted">নোট: ${esc(o.note)}</small>` : ""}</div>
+    <ul>${(o.items || []).map(i => `<li>${esc(i.name)} × ${bn(i.qty)} = ${money(i.price * i.qty)}</li>`).join("")}</ul>
+    <div><b>সর্বমোট: ${money(o.total)}</b> <small class="muted">(ডেলিভারি ${money(o.deliveryCharge)})</small></div>
+    <div class="act"><select data-st="${o.id}">${STATUSES.map(s => `<option ${o.status === s ? "selected" : ""}>${s}</option>`).join("")}</select>
+    <a class="btn s o" target="_blank" href="https://wa.me/88${esc(o.phone)}">💬 WhatsApp</a><button class="btn s r" data-del-o="${o.id}">মুছুন</button></div></div>`).join("") : '<p class="muted" style="padding:20px;text-align:center">কোনো অর্ডার নেই।</p>'}`;
+}
+$("#p-orders").addEventListener("change", async e => {
+  if (e.target.id === "os") { ofil.s = e.target.value; orders(); return; }
+  const id = e.target.dataset.st; if (!id) return;
+  await updateDoc(doc(db, "orders", id), { status: e.target.value });
+  D.orders.find(o => o.id === id).status = e.target.value; toast("স্ট্যাটাস আপডেট হয়েছে"); orders(); dash(); report();
+});
+$("#p-orders").addEventListener("input", e => { if (e.target.id === "oq") { ofil.q = e.target.value.trim().toLowerCase(); const p = e.target.selectionStart; orders(); const i = $("#oq"); i.focus(); i.setSelectionRange(p, p); } });
+$("#p-orders").addEventListener("click", async e => {
+  const id = e.target.dataset.delO; if (!id || !confirm("এই অর্ডার মুছে ফেলবেন?")) return;
+  await deleteDoc(doc(db, "orders", id)); D.orders = D.orders.filter(o => o.id !== id); orders(); dash(); report(); toast("মুছে ফেলা হয়েছে");
+});
+
+// ---------- products
+function products() {
+  $("#p-products").innerHTML = `<div style="display:flex;justify-content:space-between;margin-bottom:10px"><b>${bn(D.products.length)}টি পণ্য</b><button class="btn" data-pe="">＋ নতুন পণ্য</button></div>
+  <div class="box">${D.products.length ? D.products.map(p => `<div class="row">${p.image ? `<img src="${esc(p.image)}" alt="">` : '<div class="ph">🌿</div>'}
+   <div class="t"><b>${esc(p.name)}</b><small>${esc(p.category || "ক্যাটাগরি নেই")} • ${money(p.price)}${p.oldPrice > p.price ? ` <s>${money(p.oldPrice)}</s>` : ""} • স্টক: ${p.stock === "" || p.stock == null ? "—" : bn(p.stock)}${p.active === false ? " • <b style='color:var(--red)'>লুকানো</b>" : ""}</small></div>
+   <button class="btn s o" data-pe="${p.id}">এডিট</button><button class="btn s r" data-pd="${p.id}">মুছুন</button></div>`).join("") : '<p class="muted">এখনো কোনো পণ্য নেই। "নতুন পণ্য" চাপুন।</p>'}</div>`;
+}
+$("#p-products").addEventListener("click", async e => {
+  const pe = e.target.dataset.pe, pd = e.target.dataset.pd;
+  if (pd && confirm("পণ্যটি মুছে ফেলবেন?")) { await deleteDoc(doc(db, "products", pd)); D.products = D.products.filter(p => p.id !== pd); products(); dash(); toast("মুছে ফেলা হয়েছে"); }
+  if (pe != null) productForm(pe);
+});
+function productForm(id) {
+  const p = D.products.find(x => x.id === id) || { active: true };
+  openModal(`<h3>${id ? "পণ্য এডিট" : "নতুন পণ্য"}</h3><form id="pf" class="form">
+   <div class="full"><label>পণ্যের নাম *</label><input id="f-name" required value="${esc(p.name)}"></div>
+   <div><label>ক্যাটাগরি</label><select id="f-cat"><option value="">— নির্বাচন —</option>${D.cats.map(c => `<option ${p.category === c.name ? "selected" : ""}>${esc(c.name)}</option>`).join("")}</select></div>
+   <div><label>পরিমাণ/ইউনিট (যেমন: ৫০০ গ্রাম)</label><input id="f-unit" value="${esc(p.unit)}"></div>
+   <div><label>বিক্রয় মূল্য (৳) *</label><input id="f-price" type="number" min="0" step="any" required value="${p.price ?? ""}"></div>
+   <div><label>আগের মূল্য (ছাড় দেখাতে)</label><input id="f-old" type="number" min="0" step="any" value="${p.oldPrice ?? ""}"></div>
+   <div><label>স্টক (ফাঁকা = সীমাহীন)</label><input id="f-stock" type="number" min="0" value="${p.stock ?? ""}"></div>
+   <div><label>দেখাবে?</label><select id="f-act"><option value="1" ${p.active !== false ? "selected" : ""}>হ্যাঁ</option><option value="0" ${p.active === false ? "selected" : ""}>না (লুকানো)</option></select></div>
+   <div class="full"><label>বিবরণ</label><textarea id="f-desc" rows="3">${esc(p.description)}</textarea></div>
+   <div class="full"><label>ছবি</label><input id="f-img" type="file" accept="image/*"><input type="hidden" id="f-imgdata" value="${esc(p.image)}">
+     <img class="pv" id="f-pv" ${p.image ? `src="${esc(p.image)}"` : "hidden"}></div>
+   <div class="full" style="display:flex;gap:8px;justify-content:flex-end"><button type="button" class="btn o" data-x>বাতিল</button><button class="btn" id="f-save" type="submit">সংরক্ষণ</button></div></form>`);
+  $("#f-img").onchange = async e => { const f = e.target.files[0]; if (!f) return; const d = await fileToData(f, 700); $("#f-imgdata").value = d; $("#f-pv").src = d; $("#f-pv").hidden = false; };
+  $("#pf").onsubmit = async e => {
+    e.preventDefault(); $("#f-save").disabled = true;
+    const data = { name: $("#f-name").value.trim(), category: $("#f-cat").value, unit: $("#f-unit").value.trim(), price: Number($("#f-price").value),
+      oldPrice: $("#f-old").value === "" ? 0 : Number($("#f-old").value), stock: $("#f-stock").value === "" ? "" : Number($("#f-stock").value),
+      active: $("#f-act").value === "1", description: $("#f-desc").value.trim(), image: $("#f-imgdata").value };
+    try {
+      if (id) { await updateDoc(doc(db, "products", id), data); Object.assign(p, data); }
+      else { const r = await addDoc(collection(db, "products"), { ...data, createdAt: serverTimestamp() }); D.products.unshift({ id: r.id, ...data }); }
+      closeModal(); products(); dash(); toast("সংরক্ষণ হয়েছে ✅");
+    } catch (err) { console.error(err); toast("সংরক্ষণ করা যায়নি (ছবি বড় হতে পারে)"); $("#f-save").disabled = false; }
+  };
+}
+
+// ---------- categories
+function cats() {
+  $("#p-cats").innerHTML = `<form class="box" id="cf" style="display:flex;gap:8px"><input id="cname" placeholder="নতুন ক্যাটাগরির নাম" required><button class="btn" type="submit">যোগ করুন</button></form>
+  <div class="box">${D.cats.length ? D.cats.map(c => `<div class="row"><div class="t"><b>${esc(c.name)}</b><small>${bn(D.products.filter(p => p.category === c.name).length)}টি পণ্য</small></div>
+   <button class="btn s o" data-ce="${c.id}">নাম বদলান</button><button class="btn s r" data-cd="${c.id}">মুছুন</button></div>`).join("") : '<p class="muted">কোনো ক্যাটাগরি নেই।</p>'}</div>`;
+}
+$("#p-cats").addEventListener("submit", async e => {
+  e.preventDefault(); const name = $("#cname").value.trim(); if (!name) return;
+  const r = await addDoc(collection(db, "categories"), { name }); D.cats.push({ id: r.id, name }); cats(); toast("ক্যাটাগরি যোগ হয়েছে");
+});
+$("#p-cats").addEventListener("click", async e => {
+  const ce = e.target.dataset.ce, cd = e.target.dataset.cd;
+  if (cd && confirm("ক্যাটাগরি মুছবেন? (পণ্যগুলো থেকে যাবে)")) { await deleteDoc(doc(db, "categories", cd)); D.cats = D.cats.filter(c => c.id !== cd); cats(); }
+  if (ce) {
+    const c = D.cats.find(x => x.id === ce), n = prompt("নতুন নাম:", c.name); if (!n || n.trim() === c.name) return;
+    const old = c.name; c.name = n.trim(); await updateDoc(doc(db, "categories", ce), { name: c.name });
+    for (const p of D.products.filter(p => p.category === old)) { p.category = c.name; await updateDoc(doc(db, "products", p.id), { category: c.name }); }
+    cats(); products(); toast("নাম বদলানো হয়েছে");
+  }
+});
+
+// ---------- banners
+function banners() {
+  $("#p-banners").innerHTML = `<form class="box form" id="bf"><div class="full"><b>নতুন ব্যানার (প্রস্তাবিত মাপ ১৪০০×৫২৫)</b></div>
+   <div><label>ছবি *</label><input id="b-img" type="file" accept="image/*" required></div>
+   <div><label>শিরোনাম (ঐচ্ছিক)</label><input id="b-title"></div>
+   <div><label>লিংক (ঐচ্ছিক, যেমন #products)</label><input id="b-link"></div>
+   <div style="align-self:end"><button class="btn" type="submit">যোগ করুন</button></div></form>
+  <div class="box">${D.banners.length ? D.banners.map(b => `<div class="row"><img style="width:110px;height:42px" src="${esc(b.image)}" alt="">
+   <div class="t"><b>${esc(b.title || "ব্যানার")}</b><small>${b.active === false ? "বন্ধ" : "চালু"}</small></div>
+   <button class="btn s o" data-bt="${b.id}">${b.active === false ? "চালু করুন" : "বন্ধ করুন"}</button><button class="btn s r" data-bd="${b.id}">মুছুন</button></div>`).join("") : '<p class="muted">কোনো ব্যানার নেই।</p>'}</div>`;
+}
+$("#p-banners").addEventListener("submit", async e => {
+  e.preventDefault(); const f = $("#b-img").files[0]; if (!f) return;
+  const data = { image: await fileToData(f, 1400, 0.7), title: $("#b-title").value.trim(), link: $("#b-link").value.trim(), active: true };
+  try { const r = await addDoc(collection(db, "banners"), data); D.banners.push({ id: r.id, ...data }); banners(); toast("ব্যানার যোগ হয়েছে ✅"); }
+  catch { toast("ব্যানার সংরক্ষণ করা যায়নি"); }
+});
+$("#p-banners").addEventListener("click", async e => {
+  const bt = e.target.dataset.bt, bd = e.target.dataset.bd;
+  if (bt) { const b = D.banners.find(x => x.id === bt); b.active = b.active === false; await updateDoc(doc(db, "banners", bt), { active: b.active }); banners(); }
+  if (bd && confirm("ব্যানার মুছবেন?")) { await deleteDoc(doc(db, "banners", bd)); D.banners = D.banners.filter(b => b.id !== bd); banners(); }
+});
+
+// ---------- report
+let rr = { from: "", to: "" };
+function report() {
+  const now = new Date(), first = new Date(now.getFullYear(), now.getMonth(), 1);
+  if (!rr.from) { rr.from = dkey(first); rr.to = dkey(now); }
+  const inR = D.orders.filter(o => { const k = dkey(ts(o)); return k >= rr.from && k <= rr.to; });
+  const v = inR.filter(valid), del = inR.filter(o => o.status === "ডেলিভারড"), canc = inR.filter(o => o.status === "ক্যান্সেল");
+  const sum = a => a.reduce((x, o) => x + (o.total || 0), 0);
+  const byDay = {}; v.forEach(o => { const k = dkey(ts(o)); (byDay[k] ||= { n: 0, t: 0 }); byDay[k].n++; byDay[k].t += o.total || 0; });
+  const byP = {}; v.forEach(o => (o.items || []).forEach(i => { (byP[i.name] ||= { q: 0, t: 0 }); byP[i.name].q += i.qty; byP[i.name].t += i.price * i.qty; }));
+  const top = Object.entries(byP).sort((a, b) => b[1].t - a[1].t).slice(0, 10);
+  $("#p-report").innerHTML = `<div class="filters"><div><label>শুরু</label><input type="date" id="rf" value="${rr.from}"></div><div><label>শেষ</label><input type="date" id="rt" value="${rr.to}"></div>
+   <button class="btn" id="csv" style="align-self:end">⬇️ CSV</button></div>
+  <div class="stats"><div class="stat"><small>মোট অর্ডার (ক্যান্সেল বাদে)</small><b>${bn(v.length)}</b></div><div class="stat"><small>মোট বিক্রি</small><b>${money(sum(v))}</b></div>
+   <div class="stat"><small>ডেলিভারড বিক্রি</small><b>${money(sum(del))}</b></div><div class="stat"><small>ক্যান্সেল</small><b>${bn(canc.length)}</b></div></div>
+  <div class="box"><h3>সবচেয়ে বেশি বিক্রিত পণ্য</h3>${top.length ? `<div class="tw"><table><tr><th>পণ্য</th><th>সংখ্যা</th><th>টাকা</th></tr>${top.map(([n, x]) => `<tr><td>${esc(n)}</td><td>${bn(x.q)}</td><td>${money(x.t)}</td></tr>`).join("")}</table></div>` : '<p class="muted">তথ্য নেই।</p>'}</div>
+  <div class="box"><h3>দিন অনুযায়ী</h3>${Object.keys(byDay).length ? `<div class="tw"><table><tr><th>তারিখ</th><th>অর্ডার</th><th>বিক্রি</th></tr>${Object.keys(byDay).sort().reverse().map(k => `<tr><td>${bn(k)}</td><td>${bn(byDay[k].n)}</td><td>${money(byDay[k].t)}</td></tr>`).join("")}</table></div>` : '<p class="muted">তথ্য নেই।</p>'}</div>`;
+  $("#csv").onclick = () => {
+    const rows = [["অর্ডার নং", "তারিখ", "নাম", "মোবাইল", "ঠিকানা", "পণ্য", "মোট", "স্ট্যাটাস"],
+      ...inR.map(o => [o.id.slice(0, 6).toUpperCase(), dkey(ts(o)), o.name, o.phone, o.address, (o.items || []).map(i => `${i.name}x${i.qty}`).join("; "), o.total, o.status])];
+    const csv = "\uFEFF" + rows.map(r => r.map(c => `"${String(c ?? "").replace(/"/g, '""')}"`).join(",")).join("\n");
+    const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" })); a.download = `orders_${rr.from}_${rr.to}.csv`; a.click();
+  };
+}
+$("#p-report").addEventListener("change", e => { if (e.target.id === "rf") rr.from = e.target.value; if (e.target.id === "rt") rr.to = e.target.value; if (e.target.id === "rf" || e.target.id === "rt") report(); });
+
+// ---------- settings
+function settings() {
+  $("#p-settings").innerHTML = `<form class="box form" id="sf"><div class="full"><b>দোকানের সেটিংস</b></div>
+   <div><label>WhatsApp নম্বর (দেশের কোডসহ, যেমন 8801XXXXXXXXX)</label><input id="s-wa" value="${esc(D.settings.whatsapp)}" required></div>
+   <div><label>ডেলিভারি চার্জ (৳)</label><input id="s-dc" type="number" min="0" value="${D.settings.deliveryCharge ?? 0}"></div>
+   <div class="full"><button class="btn" type="submit">সংরক্ষণ</button></div></form>`;
+}
+$("#p-settings").addEventListener("submit", async e => {
+  e.preventDefault();
+  D.settings = { whatsapp: $("#s-wa").value.replace(/\D/g, ""), deliveryCharge: Number($("#s-dc").value) || 0 };
+  await setDoc(doc(db, "settings", "main"), D.settings); toast("সেটিংস সংরক্ষণ হয়েছে ✅");
+});

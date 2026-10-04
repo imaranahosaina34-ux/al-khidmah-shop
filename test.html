@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="bn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Login Test</title>
+<style>body{font-family:sans-serif;padding:16px;max-width:420px;margin:auto}input,button{width:100%;padding:12px;margin:6px 0;font-size:16px}pre{background:#eee;padding:10px;white-space:pre-wrap;word-break:break-all}</style></head>
+<body>
+<h3>লগইন পরীক্ষা</h3>
+<pre id="log">১) পেজ লোড হয়েছে</pre>
+<input id="em" type="email" placeholder="ইমেইল">
+<input id="pw" type="password" placeholder="পাসওয়ার্ড">
+<button id="go">পরীক্ষা করুন</button>
+<script>
+window.addEventListener("error", e => log("ভুল: " + e.message));
+window.addEventListener("unhandledrejection", e => log("ভুল: " + (e.reason && e.reason.message || e.reason)));
+function log(t){ document.getElementById("log").textContent += "\n" + t; }
+</script>
+<script type="module">
+const L = t => document.getElementById("log").textContent += "\n" + t;
+try {
+  const { initializeApp } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js");
+  L("২) Firebase লাইব্রেরি লোড হয়েছে");
+  const { getAuth, signInWithEmailAndPassword } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js");
+  L("৩) Auth লাইব্রেরি লোড হয়েছে");
+  const { firebaseConfig } = await import("./firebase-config.js");
+  L("৪) কনফিগ ফাইল লোড হয়েছে");
+  const auth = getAuth(initializeApp(firebaseConfig));
+  L("৫) প্রস্তুত, ইমেইল ও পাসওয়ার্ড দিয়ে বাটন চাপুন");
+  document.getElementById("go").onclick = async () => {
+    L("... চেষ্টা চলছে");
+    try {
+      const r = await signInWithEmailAndPassword(auth, document.getElementById("em").value.trim(), document.getElementById("pw").value);
+      L("সফল! লগইন হয়েছে: " + r.user.email);
+    } catch (e) { L("লগইন ব্যর্থ: " + e.code); }
+  };
+} catch (e) { L("ধাপে ব্যর্থ: " + e.message); }
+</script></body></html>

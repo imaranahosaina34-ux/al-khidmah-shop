@@ -326,7 +326,6 @@ function report() {
   };
 }
 $("#p-report").addEventListener("change", e => { if (e.target.id === "rf") rr.from = e.target.value; if (e.target.id === "rt") rr.to = e.target.value; if (e.target.id === "rf" || e.target.id === "rt") report(); });
-
 // ---------- settings
 function settings() {
   $("#p-settings").innerHTML = `<form class="box form" id="sf"><div class="full"><b>দোকানের সেটিংস</b></div>
@@ -339,3 +338,6 @@ $("#p-settings").addEventListener("submit", async e => {
   D.settings = { whatsapp: $("#s-wa").value.replace(/\D/g, ""), deliveryCharge: Number($("#s-dc").value) || 0 };
   await setDoc(doc(db, "settings", "main"), D.settings); toast("সেটিংস সংরক্ষণ হয়েছে ✅");
 });
+</script>
+</body>
+</html>
